@@ -1,0 +1,23 @@
+services:
+
+  mongodb:
+    build: mongodb/
+    image: mongohaslinger
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/mongodb/data
+
+    networks:
+      - backend
+        
+networks:
+  backend:
+
+volumes:
+  pgdata:
+  pgadmindata:
+   
