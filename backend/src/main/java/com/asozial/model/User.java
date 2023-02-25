@@ -3,6 +3,8 @@ package com.asozial.model;
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 
+import java.util.List;
+
 @MongoEntity(collection = "user")
 public class User extends PanacheMongoEntity {
 
@@ -10,4 +12,6 @@ public class User extends PanacheMongoEntity {
     public String email;
     public String password;
     public String bio;
+
+    public List<FavoriteCat> favoriteCats;
 }
