@@ -6,8 +6,8 @@ import io.quarkus.mongodb.panache.common.MongoEntity;
 @MongoEntity(collection = "user")
 public class User extends PanacheMongoEntity {
 
-    String name;
-    String email;
-    String password;
-    String bio;
+    public String name;
+    public String email;
+    public String password;
+    public String bio;
 }
