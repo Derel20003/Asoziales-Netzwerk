@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 public class Post extends PanacheMongoEntity {
 
     @Size(max = 500)
-    String content;
+    public String content;
 
-    LocalDateTime timestamp;
+    public LocalDateTime timestamp;
 
 }
