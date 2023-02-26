@@ -25,7 +25,6 @@ public class UserService {
     @POST
     public Response add(User user) {
         this.userRepository.persist(user);
-
         return Response.ok().build();
     }
 }
