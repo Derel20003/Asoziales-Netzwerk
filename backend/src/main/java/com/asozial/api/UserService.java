@@ -17,6 +17,7 @@ public class UserService {
     UserRepository userRepository;
 
     @GET
+    @Path("/all")
     public Response getAll() {
         return Response.ok(userRepository.listAll()).build();
     }
