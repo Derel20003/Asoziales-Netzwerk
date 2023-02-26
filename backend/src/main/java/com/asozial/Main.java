@@ -13,11 +13,17 @@ public class Main {
 
     public static class Startup implements QuarkusApplication {
 
+        @Inject
+        MongoClient mongoClient;
+
         @Override
         public int run(String... args) throws Exception {
             Quarkus.waitForExit();
             return 0;
         }
 
+        public MongoDatabase getDatabase() {
+            return mongoClient.getDatabase("asoziales-netzwerk");
+        }
     }
 }
