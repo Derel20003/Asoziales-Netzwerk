@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/user")
-public class UserService {
+public class UserResource {
 
     @Inject
     UserRepository userRepository;

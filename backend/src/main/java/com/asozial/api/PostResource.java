@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/post")
-public class PostService {
+public class PostResource {
 
     @Inject
     PostRepository postRepository;
