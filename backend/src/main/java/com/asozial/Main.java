@@ -3,6 +3,7 @@ package com.asozial;
 import com.asozial.model.FavoriteCat;
 import com.asozial.model.Post;
 import com.asozial.model.User;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import io.quarkus.runtime.QuarkusApplication;
@@ -13,6 +14,7 @@ import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @QuarkusMain
 public class Main {
@@ -34,7 +36,7 @@ public class Main {
 
             // ADD DATA TO COLLECTIONS
             getDatabase().getCollection("user", User.class).insertMany(createUsers());
-            getDatabase().getCollection("post", Post.class).insertMany(createPosts());
+            getDatabase().getCollection("post", Post.class).insertMany(createPosts(getDatabase().getCollection("user", User.class).find()));
 
             Quarkus.waitForExit();
             return 0;
@@ -109,19 +111,21 @@ public class Main {
             return users;
         }
 
-        public List<Post> createPosts() {
+        public List<Post> createPosts(FindIterable<User> user) {
             List<Post> posts = new LinkedList<>();
 
             // Post 1
             Post post1 = new Post();
             post1.content = "Hello, this is my first post. I hope you like it.";
             post1.timestamp = LocalDateTime.now();
+            post1.userId = Objects.requireNonNull(user.first()).id;
             posts.add(post1);
 
             // Post2
             Post post2 = new Post();
             post2.content = "Yo yo, waddup. Hope you enjoy your day!";
             post2.timestamp = LocalDateTime.now();
+            post2.userId = Objects.requireNonNull(user.skip(1).first()).id;
             posts.add(post2);
 
             return posts;

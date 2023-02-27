@@ -30,7 +30,13 @@ public class PostResource {
     @GET
     @Path("/all")
     public Response getAll() {
-        return Response.ok(this.postRepository.listAll()).build();
+        return Response.ok(this.postRepository.getLatestPosts(0)).build();
+    }
+
+    @GET
+    @Path("/user/{id}")
+    public Response getPostsForUser(@PathParam("id") String id) {
+        return Response.ok(this.postRepository.getPostsByUser(new ObjectId(id))).build();
     }
 
     @GET

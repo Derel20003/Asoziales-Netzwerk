@@ -6,4 +6,5 @@ public class PostDTO {
 
     @Size(max = 500)
     public String content;
+    public String userId;
 }
