@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @MongoEntity(collection = "post")
@@ -17,6 +18,6 @@ public class Post extends PanacheMongoEntity {
     public LocalDateTime timestamp;
     public ObjectId userId;
 
-    public List<Interaction> interactions;
+    public List<Interaction> interactions = new ArrayList<>();
 
 }
