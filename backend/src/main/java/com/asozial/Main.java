@@ -1,5 +1,6 @@
 package com.asozial;
 
+import com.asozial.model.FavoriteCat;
 import com.asozial.model.Post;
 import com.asozial.model.User;
 import com.mongodb.client.MongoClient;
@@ -39,7 +40,34 @@ public class Main {
             return 0;
         }
 
+        public List<FavoriteCat> createCats() {
+            List<FavoriteCat> cats = new LinkedList<>();
+
+            FavoriteCat cat1 = new FavoriteCat();
+            cat1.imgURL = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg";
+            cat1.name = "Abyssinian";
+            cats.add(cat1);
+
+            FavoriteCat cat2 = new FavoriteCat();
+            cat2.imgURL = "https://cdn2.thecatapi.com/images/hj7Oh-SRY.jpg";
+            cat2.name = "Burmese";
+            cats.add(cat2);
+
+            FavoriteCat cat3 = new FavoriteCat();
+            cat3.imgURL = "https://cdn2.thecatapi.com/images/Br8qCwbS9.jpg";
+            cat3.name = "Sphynx";
+            cats.add(cat3);
+
+            FavoriteCat cat4 = new FavoriteCat();
+            cat4.imgURL = "https://cdn2.thecatapi.com/images/AYfFc4vOB.jpg";
+            cat4.name = "Persian";
+            cats.add(cat4);
+
+            return cats;
+        }
+
         public List<User> createUsers() {
+            List<FavoriteCat> cats = createCats();
             List<User> users = new LinkedList<>();
 
             // User 1
@@ -48,6 +76,7 @@ public class Main {
             user1.email = "d.auinger@yelp.com";
             user1.bio = "i live in hell";
             user1.password = "12345";
+            user1.favoriteCats = cats.subList(2, 3);
             users.add(user1);
 
             // User 2
@@ -56,6 +85,7 @@ public class Main {
             user2.email = "f.ettinger@yahoo.net";
             user2.bio = "me too";
             user2.password = "54321";
+            user2.favoriteCats = cats.subList(0, 2);
             users.add(user2);
 
             // User 3
@@ -64,6 +94,7 @@ public class Main {
             user3.email = "l.lanzinger@gmx.at";
             user3.bio = "i love lanzen";
             user3.password = "13249";
+            user3.favoriteCats = cats.subList(1, 2);
             users.add(user3);
 
             // User 4
@@ -72,6 +103,7 @@ public class Main {
             user4.email = "m.pouget@gmail.de";
             user4.bio = "i too love lanzen";
             user4.password = "214365";
+            user4.favoriteCats = cats.subList(3, 4);
             users.add(user4);
 
             return users;
