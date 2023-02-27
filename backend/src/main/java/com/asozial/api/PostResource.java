@@ -1,6 +1,8 @@
 package com.asozial.api;
 
+import com.asozial.model.Interaction;
 import com.asozial.model.Post;
+import com.asozial.model.dto.InteractionDTO;
 import com.asozial.model.dto.PostDTO;
 import com.asozial.repository.PostRepository;
 import org.bson.types.ObjectId;
@@ -50,8 +52,23 @@ public class PostResource {
         Post post = new Post();
         post.content = p.content;
         post.timestamp = LocalDateTime.now();
+        post.userId = new ObjectId(p.userId);
         postRepository.persist(post);
         return Response.created(URI.create(post.id.toString())).build();
+    }
+
+    @POST
+    @Path("/interact")
+    public Response interact(InteractionDTO i) {
+        postRepository.findByIdOptional(new ObjectId(i.postId)).ifPresent(p -> {
+            Interaction interaction = new Interaction();
+            interaction.interactorId = new ObjectId(i.interactorId);
+            interaction.type = i.type;
+            interaction.timestamp = LocalDateTime.now();
+            p.interactions.add(interaction);
+            postRepository.update(p);
+        });
+        return Response.status(201).build();
     }
 
     @PUT
