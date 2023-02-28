@@ -17,6 +17,6 @@ export class PostDialogComponent implements OnInit {
   }
 
   post() {
-    this.http.post(this.postContent).subscribe()
+    this.http.post(this.postContent)
   }
 }
