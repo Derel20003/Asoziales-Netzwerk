@@ -26,6 +26,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import { PostComponent } from './post/post.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import {NgxJdenticonModule} from "ngx-jdenticon";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { PostComponent } from './post/post.component';
     UsersComponent,
     SearchComponent,
     AuthComponent,
-    PostComponent
+    PostComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { PostComponent } from './post/post.component';
     MatSnackBarModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatInputModule
+    MatInputModule,
+    NgxJdenticonModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'de-AT'},
     {
