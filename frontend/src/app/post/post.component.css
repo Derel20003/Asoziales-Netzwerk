@@ -22,4 +22,5 @@ mat-card-header {
 
 .interactions mat-icon {
   font-size: 1rem;
+  cursor: pointer;
 }

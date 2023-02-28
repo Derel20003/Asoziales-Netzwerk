@@ -11,17 +11,21 @@ import {User} from "../../model/user.model";
 export class UserDetailComponent implements OnInit {
 
   user?: User;
+  id: string = '';
 
   constructor(private http: HttpService, private route: ActivatedRoute) {
     route.paramMap.subscribe(map => {
-      const id: string = map.get("id") ?? '';
-      this.http.getUserProfile(id).subscribe(res => {
-        this.user = res;
-      })
+      this.id = map.get("id") ?? '';
+      this.refresh();
     })
   }
 
   ngOnInit(): void {
   }
 
+  refresh() {
+    this.http.getUserProfile(this.id).subscribe(res => {
+      this.user = res;
+    })
+  }
 }

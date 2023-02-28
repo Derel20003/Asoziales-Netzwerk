@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -68,8 +69,19 @@ public class PostResource {
     @Path("/interact")
     public Response interact(InteractionDTO i) {
         postService.findByIdOptional(i.postId).ifPresent(p -> {
+            ObjectId oid = new ObjectId(jwt.getName());
+            var interactions = p.interactions.stream()
+                    .filter(interaction -> interaction.interactorId.equals(oid) &&
+                            interaction.type.equals(i.type)).collect(Collectors.toList());
+            if (interactions.size() > 0) {
+                interactions.forEach(interaction -> {
+                    p.interactions.remove(interaction);
+                });
+                postService.update(p);
+                return;
+            }
             Interaction interaction = new Interaction();
-            interaction.interactorId = new ObjectId(jwt.getName());
+            interaction.interactorId = oid;
             interaction.type = i.type;
             interaction.timestamp = LocalDateTime.now();
             p.interactions.add(interaction);

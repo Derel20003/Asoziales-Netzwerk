@@ -13,9 +13,12 @@ export class HomeComponent implements OnInit {
   constructor(private http: HttpService) { }
 
   ngOnInit(): void {
-    this.http.getAllPosts().subscribe((posts) => {
-      this.posts = posts;
-    })
+    this.refresh();
   }
 
+  refresh() {
+    this.http.getAllPosts().subscribe((posts) => {
+      this.posts = posts;
+    });
+  }
 }

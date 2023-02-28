@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Interaction, Post} from "../model/post.model";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Interaction, InteractionType, Post} from "../model/post.model";
+import {HttpService} from "../services/http.service";
 
 @Component({
   selector: 'app-post',
@@ -8,20 +9,32 @@ import {Interaction, Post} from "../model/post.model";
 })
 export class PostComponent implements OnInit {
 
-  @Input("post") post: Post = {content: 'test', comments: [], interactions: [], timestamp: new Date(), userId: ''};
+  @Input("post") post: Post = {id: '', _id: '', content: 'test', comments: [], interactions: [], timestamp: new Date(), userId: ''};
+  @Output() updateEvent = new EventEmitter<any>();
   filterDislikes(i: Interaction): boolean {
-    return i.type == 'DISLIKE'
+    return i.type == InteractionType.DISLIKE
   }
 
   filterHates(i: Interaction): boolean {
-    return i.type == 'HATE'
+    return i.type == InteractionType.HATE
   }
 
-  constructor() { }
+  constructor(private http: HttpService) { }
 
   ngOnInit(): void {
   }
 
+  dislike() {
+    this.http.interact(this.post.id ?? this.post._id, InteractionType.DISLIKE)
+      .subscribe(() => {
+        this.updateEvent.emit('dislike')
+      });
+  }
 
-
+  hate() {
+    this.http.interact(this.post.id ?? this.post._id, InteractionType.HATE)
+      .subscribe(() => {
+        this.updateEvent.emit('dislike')
+      });
+  }
 }

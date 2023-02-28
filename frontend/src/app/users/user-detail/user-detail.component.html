@@ -16,7 +16,7 @@
       <svg class="pic" width="100" height="100" [data-jdenticon-value]="user.name"></svg>
     </div>
     <div class="posts">
-      <app-post *ngFor="let post of user.posts" [post]="post"></app-post>
+      <app-post *ngFor="let post of user.posts" [post]="post" (updateEvent)="refresh()"></app-post>
     </div>
   </ng-container>
   <ng-template #notFound>
