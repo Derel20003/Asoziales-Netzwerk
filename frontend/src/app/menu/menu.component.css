@@ -7,8 +7,17 @@
   font-weight: normal;
 }
 
+#post-button {
+  width: 120px;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 20px;
+}
+
 #menu {
-  color: blue;
+  color: #00b2ff;
   padding-left: 48px;
 }
 
@@ -36,7 +45,7 @@
 }
 
 .active {
-  color: blue;
+  color: #00B2FFFF;
 }
 
 /* not really clean! */

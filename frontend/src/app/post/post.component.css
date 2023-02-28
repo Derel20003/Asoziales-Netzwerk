@@ -6,6 +6,11 @@ mat-card-header {
 ::ng-deep .mat-card-header-text {
   margin: 0 !important;
 }
+
+.dislikes {
+  color: #00B2FFFF;
+}
+
 .interactions {
   display: inline-flex;
   flex-direction: row;

@@ -4,7 +4,7 @@
       [mode]="'side'"
       [opened]="true">
     <mat-toolbar id="menu">
-      <img src="assets/icon-blue.png" alt="icon">&nbsp;AsiNet
+      <img src="assets/icon-light-blue.png" alt="icon">&nbsp;AsiNet
     </mat-toolbar>
     <mat-nav-list (click)="changeTitle()">
       <a mat-list-item routerLink="home/" routerLinkActive="active"><mat-icon>window</mat-icon>&nbsp;Home</a>
@@ -12,6 +12,7 @@
       <a mat-list-item routerLink="users/" routerLinkActive="active"><mat-icon>account_box</mat-icon>&nbsp;Users</a>
       <a mat-list-item routerLink="cats/" routerLinkActive="active"><mat-icon>pets</mat-icon>&nbsp;Cats</a>
     </mat-nav-list>
+    <button mat-flat-button color="primary" id="post-button">Post</button>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" id="header">

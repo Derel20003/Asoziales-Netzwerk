@@ -20,7 +20,6 @@ import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import { AuthComponent } from './auth/auth.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCardModule} from "@angular/material/card";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ReactiveFormsModule} from "@angular/forms";
