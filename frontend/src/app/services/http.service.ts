@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {Post} from "../model/post.model";
 import {User} from "../model/user.model";
 
@@ -10,6 +10,7 @@ import {User} from "../model/user.model";
 export class HttpService {
 
   BASE_URL = 'http://localhost:8080/'
+  postChanged$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient) { }
 

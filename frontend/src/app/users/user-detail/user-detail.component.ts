@@ -16,7 +16,9 @@ export class UserDetailComponent implements OnInit {
   constructor(private http: HttpService, private route: ActivatedRoute) {
     route.paramMap.subscribe(map => {
       this.id = map.get("id") ?? '';
-      this.refresh();
+      http.postChanged$.subscribe(() => {
+        this.refresh();
+      })
     })
   }
 
