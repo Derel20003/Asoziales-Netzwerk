@@ -10,6 +10,7 @@ import com.mongodb.client.MongoDatabase;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import io.quarkus.runtime.Quarkus;
+import org.bson.Document;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.inject.Inject;
@@ -49,6 +50,8 @@ public class Main {
             users.get(0).subscriptions.add(subscription);
             getDatabase().getCollection("user", User.class).insertMany(users);
             getDatabase().getCollection("post", Post.class).insertMany(createPosts(getDatabase().getCollection("user", User.class).find()));
+
+            getDatabase().getCollection("post", Post.class).createIndex(new Document("content", "text"));
 
             Quarkus.waitForExit();
             return 0;

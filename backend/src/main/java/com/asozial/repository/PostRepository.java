@@ -54,6 +54,10 @@ public class PostRepository implements PanacheMongoRepository<Post> {
                 Sort.by("timestamp", Sort.Direction.Descending), userId).list();
     }
 
+    public List<Post> search(String query) {
+        return find(new Document("$text", new Document("$search", query))).list();
+    }
+
     public MongoDatabase getDatabase() {
         return mongoClient.getDatabase(database);
     }

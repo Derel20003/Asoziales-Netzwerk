@@ -38,7 +38,7 @@ public class PostService {
     }
 
     public List<Post> search(String content) {
-        return postRepository.list("content", content);
+        return postRepository.search(content);
     }
 
     public void persist(Post post) {
