@@ -12,13 +12,19 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HomeComponent } from './home/home.component';
+import { CatsComponent } from './cats/cats.component';
+import { UsersComponent } from './users/users.component';
+import { SearchComponent } from './search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    HomeComponent
+    HomeComponent,
+    CatsComponent,
+    UsersComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
