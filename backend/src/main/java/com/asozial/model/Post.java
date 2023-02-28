@@ -17,7 +17,7 @@ public class Post extends PanacheMongoEntity {
 
     public LocalDateTime timestamp;
     public ObjectId userId;
-
     public List<Interaction> interactions = new ArrayList<>();
+    public ObjectId commentOn;
 
 }

@@ -9,6 +9,7 @@ import com.mongodb.client.MongoDatabase;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import io.quarkus.runtime.Quarkus;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.inject.Inject;
 import java.time.LocalDateTime;
@@ -27,6 +28,9 @@ public class Main {
 
         @Inject
         MongoClient mongoClient;
+        @Inject
+        @ConfigProperty(name = "quarkus.mongodb.database")
+        String database;
 
         @Override
         public int run(String... args) throws Exception {
@@ -132,7 +136,7 @@ public class Main {
         }
 
         public MongoDatabase getDatabase() {
-            return mongoClient.getDatabase("asoziales-netzwerk");
+            return mongoClient.getDatabase(database);
         }
     }
 }
