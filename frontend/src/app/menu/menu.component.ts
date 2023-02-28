@@ -1,6 +1,8 @@
-import {AfterContentChecked, AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterContentChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {PostDialogComponent} from "../post/post-dialog/post-dialog.component";
 
 @Component({
   selector: 'app-menu',
@@ -9,8 +11,11 @@ import {Router} from "@angular/router";
 })
 export class MenuComponent implements AfterContentChecked {
   title: String = '';
+  loggedIn: boolean = false
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
+  constructor(private breakpointObserver: BreakpointObserver,
+              private router: Router,
+              private dialog: MatDialog) {
   }
 
   ngAfterContentChecked() {
@@ -18,7 +23,14 @@ export class MenuComponent implements AfterContentChecked {
   }
 
   changeTitle() {
-    let title = this.router.url.split('/')[1]
+    let url = this.router.url
+    let title = url == '/' ? 'auth' : url.split('/')[1]
+    if (title.includes('auth')) title = 'authentication'
+    else this.loggedIn = true
     this.title = title[0].toUpperCase() + title.slice(1)
+  }
+
+  createPost() {
+    this.dialog.open(PostDialogComponent)
   }
 }

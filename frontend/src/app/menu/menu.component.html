@@ -12,7 +12,8 @@
       <a mat-list-item routerLink="users/" routerLinkActive="active"><mat-icon>account_box</mat-icon>&nbsp;Users</a>
       <a mat-list-item routerLink="cats/" routerLinkActive="active"><mat-icon>pets</mat-icon>&nbsp;Cats</a>
     </mat-nav-list>
-    <button mat-flat-button color="primary" id="post-button">Post</button>
+    <button mat-flat-button color="primary" id="post-button"
+            *ngIf="loggedIn" (click)="createPost()">Post</button>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" id="header">

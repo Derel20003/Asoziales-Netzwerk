@@ -8,6 +8,7 @@
 mat-card {
   flex: 40% 0 1;
   margin: 1rem 3vw;
+  box-shadow: 0;
 }
 
 mat-card-content {

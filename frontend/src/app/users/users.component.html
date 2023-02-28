@@ -1,5 +1,5 @@
 <div class="users">
-  <mat-card *ngFor="let user of users" [routerLink]="['/user', user.id]">
+  <mat-card *ngFor="let user of users" [routerLink]="['/users', user.id]">
     <mat-card-content>
       <svg class="pic" width="50" height="50" [data-jdenticon-value]="user.name"></svg>
       <div>@{{user.name}}</div>

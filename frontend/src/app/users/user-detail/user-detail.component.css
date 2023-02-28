@@ -2,6 +2,10 @@
   padding: 5vh 5vw;
 }
 
+button {
+  border-radius: 10px;
+}
+
 h2 {
   font-size: 3rem;
 }

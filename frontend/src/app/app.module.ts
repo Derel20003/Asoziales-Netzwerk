@@ -27,6 +27,8 @@ import {MatInputModule} from "@angular/material/input";
 import { PostComponent } from './post/post.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import {NgxJdenticonModule} from "ngx-jdenticon";
+import { PostDialogComponent } from './post/post-dialog/post-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import {NgxJdenticonModule} from "ngx-jdenticon";
     SearchComponent,
     AuthComponent,
     PostComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    PostDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import {NgxJdenticonModule} from "ngx-jdenticon";
     ReactiveFormsModule,
     HttpClientModule,
     MatInputModule,
-    NgxJdenticonModule
+    NgxJdenticonModule,
+    MatDialogModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'de-AT'},
     {
