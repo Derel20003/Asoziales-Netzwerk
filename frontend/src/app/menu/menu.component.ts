@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-menu',
@@ -9,13 +10,13 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
+  title: String = 'Home';
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
+  }
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
-
+  changeTitle() {
+    let title = this.router.url.split('/')[1]
+    this.title = title[0].toUpperCase() + title.slice(1)
+  }
 }

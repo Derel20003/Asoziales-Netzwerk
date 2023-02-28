@@ -1,3 +1,17 @@
+#header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  color: black;
+}
+
+#header > span {
+  font-weight: normal;
+}
+
+#menu {
+  color: blue;
+  padding-left: 48px;
+}
+
 .sidenav-container {
   height: 100%;
 }
@@ -10,8 +24,22 @@
   background: inherit;
 }
 
+.mat-sidenav-content {
+  background: white;
+}
+
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color: white;
+}
+
+.active {
+  color: blue;
+}
+
+/* not really clean! */
+:host ::ng-deep .mat-list-item-content {
+  padding-left: 50px !important;
 }
