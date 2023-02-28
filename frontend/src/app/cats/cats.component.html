@@ -1,1 +1,10 @@
-<p>cats works!</p>
+<div class="cats">
+  <mat-card *ngFor="let cat of cats">
+    <mat-card-header>
+      <mat-checkbox [checked]="includes(cat)" (change)="toggle(cat)">{{cat.name}}</mat-checkbox>
+    </mat-card-header>
+    <mat-card-content>
+      <img [src]="cat.imgURL">
+    </mat-card-content>
+  </mat-card>
+</div>

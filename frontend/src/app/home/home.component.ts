@@ -10,10 +10,11 @@ import {Post} from "../model/post.model";
 export class HomeComponent implements OnInit {
   posts: Post[] = [];
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService) {
+    this.http.postChanged$.subscribe(() => this.refresh());
+  }
 
   ngOnInit(): void {
-    this.refresh();
   }
 
   refresh() {

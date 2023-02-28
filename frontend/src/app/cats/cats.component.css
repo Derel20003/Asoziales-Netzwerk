@@ -1,0 +1,25 @@
+.cats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+mat-card {
+  flex: fit-content 0 0;
+  margin: 1rem;
+}
+
+mat-card > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-card-header {
+  margin-bottom: 1rem;
+}
+
+img {
+  max-width: 20vw;
+  max-height: 30vh;
+}

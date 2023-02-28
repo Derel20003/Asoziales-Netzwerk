@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {Post} from "../model/post.model";
 import {User} from "../model/user.model";
 
@@ -10,6 +10,7 @@ import {User} from "../model/user.model";
 export class HttpService {
 
   BASE_URL = 'http://localhost:8080/'
+  postChanged$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient) { }
 
@@ -31,5 +32,17 @@ export class HttpService {
 
   post(content: String): Observable<any> {
     return this.http.post(this.BASE_URL + 'post/', {content: content})
+  }
+
+  searchPosts(query: string): Observable<Post[]>  {
+    return this.http.get<Post[]>(this.BASE_URL + 'post/find?content=' + query);
+  }
+
+  getUser(): Observable<User> {
+    return this.http.get<User>(this.BASE_URL + 'user');
+  }
+
+  postUser(user: User): Observable<any> {
+    return this.http.put(this.BASE_URL + 'user', user);
   }
 }
