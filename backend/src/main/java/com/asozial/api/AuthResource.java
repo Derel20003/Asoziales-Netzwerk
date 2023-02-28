@@ -20,7 +20,7 @@ import java.time.Instant;
 import java.util.Optional;
 import java.util.Set;
 
-@Path("/api/auth")
+@Path("/auth")
 public class AuthResource {
     @Inject
     UserRepository userRepository;

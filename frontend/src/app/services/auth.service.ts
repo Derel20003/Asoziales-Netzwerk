@@ -7,13 +7,13 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class AuthService {
-  SERVER_URL = 'http://localhost:8080/api/auth/';
+  SERVER_URL = 'http://localhost:8080/auth/';
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
   }
 
-  login(userid: string, password: string): Observable<any> {
-    return this.http.post(this.SERVER_URL, {userId: userid, password: password});
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(this.SERVER_URL, {email: email});
   }
 
   isLoggedIn(): boolean {
@@ -26,5 +26,4 @@ export class AuthService {
     sessionStorage.removeItem('id_token');
     sessionStorage.removeItem('expires_at');
   }
-
 }
