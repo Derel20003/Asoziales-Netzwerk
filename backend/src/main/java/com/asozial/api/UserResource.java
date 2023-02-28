@@ -3,7 +3,9 @@ package com.asozial.api;
 import com.asozial.model.User;
 import com.asozial.repository.UserRepository;
 import org.bson.types.ObjectId;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,6 +20,8 @@ public class UserResource {
 
     @Inject
     UserRepository userRepository;
+    @Inject
+    JsonWebToken jwt;
 
     @GET
     @Path("{id}")
@@ -44,14 +48,19 @@ public class UserResource {
     }
 
     @PUT
+    @RolesAllowed("user")
     public void update(User user) {
+        user.id = new ObjectId(jwt.getName());
         userRepository.update(user);
     }
 
     @DELETE
     @Path("{id}")
+    @RolesAllowed("user")
     public void delete(@PathParam("id") String id) {
-        userRepository.findByIdOptional(new ObjectId(id))
-                .ifPresent(user -> userRepository.delete(user));
+        if (id.equals(jwt.getName())) {
+            userRepository.findByIdOptional(new ObjectId(id))
+                    .ifPresent(user -> userRepository.delete(user));
+        }
     }
 }

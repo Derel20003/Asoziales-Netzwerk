@@ -5,5 +5,4 @@ import com.asozial.model.InteractionType;
 public class InteractionDTO {
     public InteractionType type;
     public String postId;
-    public String interactorId;
 }
