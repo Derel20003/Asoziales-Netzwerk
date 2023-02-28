@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Interaction, InteractionType, Post} from "../model/post.model";
 import {HttpService} from "../services/http.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-post',
@@ -19,7 +20,8 @@ export class PostComponent implements OnInit {
     return i.type == InteractionType.HATE
   }
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -36,5 +38,13 @@ export class PostComponent implements OnInit {
       .subscribe(() => {
         this.updateEvent.emit('hate')
       });
+  }
+
+  comment() {
+    // TODO: build comment function
+    this.snackBar.open('Currently unavailable', 'Close', {
+      duration: 3000,
+      panelClass: 'snack-bar',
+    })
   }
 }
