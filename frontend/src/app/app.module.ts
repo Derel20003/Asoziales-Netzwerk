@@ -16,6 +16,15 @@ import { CatsComponent } from './cats/cats.component';
 import { UsersComponent } from './users/users.component';
 import { SearchComponent } from './search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import { AuthComponent } from './auth/auth.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatCardModule} from "@angular/material/card";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -24,7 +33,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     CatsComponent,
     UsersComponent,
-    SearchComponent
+    SearchComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +46,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    NgbModule
+    NgbModule,
+    MatCardModule,
+    MatSnackBarModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'de-AT'},
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,
+      multi: true
+    },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

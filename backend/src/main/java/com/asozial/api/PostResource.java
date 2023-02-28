@@ -6,7 +6,9 @@ import com.asozial.model.dto.InteractionDTO;
 import com.asozial.model.dto.PostDTO;
 import com.asozial.repository.PostRepository;
 import org.bson.types.ObjectId;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,10 +20,13 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/post")
+@RolesAllowed("user")
 public class PostResource {
 
     @Inject
     PostRepository postRepository;
+    @Inject
+    JsonWebToken jwt;
 
     @GET
     @Path("{id}")
@@ -52,7 +57,9 @@ public class PostResource {
         Post post = new Post();
         post.content = p.content;
         post.timestamp = LocalDateTime.now();
-        post.userId = new ObjectId(p.userId);
+        post.userId = new ObjectId(jwt.getName());
+        if (p.commentOn != null)
+            post.commentOn = new ObjectId(p.commentOn);
         postRepository.persist(post);
         return Response.created(URI.create(post.id.toString())).build();
     }
@@ -62,7 +69,7 @@ public class PostResource {
     public Response interact(InteractionDTO i) {
         postRepository.findByIdOptional(new ObjectId(i.postId)).ifPresent(p -> {
             Interaction interaction = new Interaction();
-            interaction.interactorId = new ObjectId(i.interactorId);
+            interaction.interactorId = new ObjectId(jwt.getName());
             interaction.type = i.type;
             interaction.timestamp = LocalDateTime.now();
             p.interactions.add(interaction);
@@ -73,13 +80,23 @@ public class PostResource {
 
     @PUT
     public void update(Post post) {
-        postRepository.update(post);
+        postRepository.findByIdOptional(post.id).ifPresent(p -> {
+            ObjectId id = new ObjectId(jwt.getName());
+            if (p.userId.equals(id)) {
+                post.userId = id;
+                postRepository.update(post);
+            }
+        });
     }
 
     @DELETE
     @Path("{id}")
     public void delete(@PathParam("id") String id) {
         postRepository.findByIdOptional(new ObjectId(id))
-                .ifPresent(post -> postRepository.delete(post));
+                .ifPresent(post -> {
+                    if (post.userId.equals(new ObjectId(jwt.getName()))) {
+                        postRepository.delete(post);
+                    }
+                });
     }
 }
