@@ -9,6 +9,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-stroked-button class="blue-button-stroked" color="primary" mat-dialog-close>Cancel</button>
-  <button mat-flat-button class="blue-button-flat" color="primary" mat-dialog-close [disabled]="!postContent">Post</button>
+  <button mat-flat-button class="blue-button-flat" color="primary" mat-dialog-close
+          [disabled]="!postContent" (click)="post()">Post</button>
 </mat-dialog-actions>
 

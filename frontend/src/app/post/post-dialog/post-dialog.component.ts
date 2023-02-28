@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
+import {HttpService} from "../../services/http.service";
 
 @Component({
   selector: 'app-post-dialog',
@@ -9,9 +10,13 @@ import {MatDialogRef} from "@angular/material/dialog";
 export class PostDialogComponent implements OnInit {
   postContent: String = '';
 
-  constructor(public dialogRef: MatDialogRef<PostDialogComponent>) { }
+  constructor(private http: HttpService,
+              public dialogRef: MatDialogRef<PostDialogComponent>,) { }
 
   ngOnInit(): void {
   }
 
+  post() {
+    this.http.post(this.postContent).subscribe()
+  }
 }
