@@ -1,0 +1,18 @@
+
+<mat-card>
+  <mat-card-header>
+    <p>{{post.content}}</p>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="interactions">
+      <div class="dislikes">
+        <mat-icon>thumb_down</mat-icon>
+        <p>{{post.interactions.filter(filterDislikes).length}}</p>
+      </div>
+      <div class="hates">
+        <mat-icon>close</mat-icon>
+        <p>{{post.interactions.filter(filterHates).length}}</p>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

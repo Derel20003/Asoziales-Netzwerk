@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Post} from "../model/post.model";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  getAllPosts(): Observable<any> {
-    return this.http.get<any>(this.BASE_URL + 'post/all')
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.BASE_URL + 'post/all')
   }
 }

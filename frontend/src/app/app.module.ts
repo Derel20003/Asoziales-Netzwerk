@@ -25,6 +25,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {MatInputModule} from "@angular/material/input";
     CatsComponent,
     UsersComponent,
     SearchComponent,
-    AuthComponent
+    AuthComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
