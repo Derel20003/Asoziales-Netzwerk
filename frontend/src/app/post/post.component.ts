@@ -34,7 +34,7 @@ export class PostComponent implements OnInit {
   hate() {
     this.http.interact(this.post.id ?? this.post._id, InteractionType.HATE)
       .subscribe(() => {
-        this.updateEvent.emit('dislike')
+        this.updateEvent.emit('hate')
       });
   }
 }

@@ -22,11 +22,15 @@ export class HttpService {
   }
 
   getUserProfile(id: string): Observable<User> {
-    return this.http.get<User>(this.BASE_URL + 'user/profile/' + id);
+    return this.http.get<User>(this.BASE_URL + 'user/profile/' + id)
   }
 
   interact(id: string, interaction: string): Observable<any> {
-    return this.http.post(this.BASE_URL + 'post/interact', {postId: id, type: interaction});
+    return this.http.post(this.BASE_URL + 'post/interact', {postId: id, type: interaction})
+  }
+
+  post(content: String): Observable<any> {
+    return this.http.post(this.BASE_URL + 'post/', {content: content})
   }
 
   searchPosts(query: string): Observable<Post[]>  {

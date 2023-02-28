@@ -31,6 +31,9 @@ export class MenuComponent implements AfterContentChecked {
   }
 
   createPost() {
-    this.dialog.open(PostDialogComponent)
+    this.dialog.open(PostDialogComponent, {
+      width: '600px',
+      maxWidth: '700px'
+    })
   }
 }

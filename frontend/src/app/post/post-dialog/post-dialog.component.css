@@ -1,0 +1,17 @@
+#post-form {
+  min-width: 150px;
+  max-width: 600px;
+  width: 100%;
+}
+
+::ng-deep mat-dialog-container {
+  border-radius: 10px !important;
+}
+
+::ng-deep .mat-form-field-outline-start  {
+  border-color: #00B2FFFF !important;
+}
+
+::ng-deep .mat-form-field-outline-end {
+  border-color: #00B2FFFF !important;
+}
