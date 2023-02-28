@@ -35,3 +35,12 @@ mat-card-header {
   font-size: 1rem;
   cursor: pointer;
 }
+
+::ng-deep .snack-bar {
+  background-color: #FDFDFD;
+  color: black !important;
+}
+
+::ng-deep .snack-bar button {
+  color: #00B2FFFF !important;
+}
