@@ -29,6 +29,7 @@ import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import {NgxJdenticonModule} from "ngx-jdenticon";
 import { PostDialogComponent } from './post/post-dialog/post-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatInputModule,
     NgxJdenticonModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    MatCheckboxModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'de-AT'},
     {

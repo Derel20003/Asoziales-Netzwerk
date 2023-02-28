@@ -32,4 +32,12 @@ export class HttpService {
   searchPosts(query: string): Observable<Post[]>  {
     return this.http.get<Post[]>(this.BASE_URL + 'post/find?content=' + query);
   }
+
+  getUser(): Observable<User> {
+    return this.http.get<User>(this.BASE_URL + 'user');
+  }
+
+  postUser(user: User): Observable<any> {
+    return this.http.put(this.BASE_URL + 'user', user);
+  }
 }

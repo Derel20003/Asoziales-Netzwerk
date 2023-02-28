@@ -55,6 +55,12 @@ public class UserResource {
         return Response.created(URI.create("/user/" + user.id.toString())).build();
     }
 
+    @GET
+    @RolesAllowed("user")
+    public User loggedInUser() {
+        return userService.findById(jwt.getName());
+    }
+
     @PUT
     @RolesAllowed("user")
     public void update(User user) {
