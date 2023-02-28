@@ -1,7 +1,7 @@
 package com.asozial.api;
 
 import com.asozial.model.User;
-import com.asozial.repository.UserRepository;
+import com.asozial.service.UserService;
 import org.bson.types.ObjectId;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
@@ -19,31 +19,31 @@ import java.util.List;
 public class UserResource {
 
     @Inject
-    UserRepository userRepository;
+    UserService userService;
     @Inject
     JsonWebToken jwt;
 
     @GET
     @Path("{id}")
     public User get(@PathParam("id") String id) {
-        return userRepository.findById(new ObjectId(id));
+        return userService.findById(id);
     }
 
     @GET
     @Path("/all")
     public List<User> getAll() {
-        return userRepository.listAll();
+        return userService.listAll();
     }
 
     @GET
     @Path("/find")
     public List<User> find(@QueryParam("name") String name) {
-        return userRepository.list("name", name);
+        return userService.listByName(name);
     }
 
     @POST
     public Response add(User user) {
-        userRepository.persist(user);
+        userService.persist(user);
         return Response.created(URI.create("/user/" + user.id.toString())).build();
     }
 
@@ -51,7 +51,7 @@ public class UserResource {
     @RolesAllowed("user")
     public void update(User user) {
         user.id = new ObjectId(jwt.getName());
-        userRepository.update(user);
+        userService.update(user);
     }
 
     @DELETE
@@ -59,8 +59,8 @@ public class UserResource {
     @RolesAllowed("user")
     public void delete(@PathParam("id") String id) {
         if (id.equals(jwt.getName())) {
-            userRepository.findByIdOptional(new ObjectId(id))
-                    .ifPresent(user -> userRepository.delete(user));
+            userService.findByIdOptional(id)
+                    .ifPresent(user -> userService.delete(user));
         }
     }
 }

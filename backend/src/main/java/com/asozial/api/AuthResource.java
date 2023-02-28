@@ -3,7 +3,7 @@ package com.asozial.api;
 
 import com.asozial.model.User;
 import com.asozial.model.dto.CredentialsDTO;
-import com.asozial.repository.UserRepository;
+import com.asozial.service.UserService;
 import io.smallrye.jwt.build.Jwt;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.jwt.Claims;
@@ -23,7 +23,7 @@ import java.util.Set;
 @Path("/auth")
 public class AuthResource {
     @Inject
-    UserRepository userRepository;
+    UserService userService;
     @Inject
     @ConfigProperty(name = "smallrye.jwt.new-token.lifespan")
     long lifespan;
@@ -32,10 +32,8 @@ public class AuthResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(CredentialsDTO credentials) {
-        Optional<User> optionalUser = userRepository
-                .find("email", credentials.email)
-                .stream()
-                .findAny();
+        Optional<User> optionalUser = userService
+                .findByEmail(credentials.email);
         if (optionalUser.isEmpty()) {
             return  Response.status(Response.Status.UNAUTHORIZED).build();
         }
