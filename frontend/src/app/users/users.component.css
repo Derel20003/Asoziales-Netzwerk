@@ -1,0 +1,24 @@
+.users {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 2rem 2vw;
+}
+
+mat-card {
+  flex: 40% 0 1;
+  margin: 1rem 3vw;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+mat-card-content * {
+  margin-right: 2vw;
+}
+mat-card-content:hover div {
+  cursor: default;
+  text-decoration: underline;
+}

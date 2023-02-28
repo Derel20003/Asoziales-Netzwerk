@@ -1,1 +1,8 @@
-<p>users works!</p>
+<div class="users">
+  <mat-card *ngFor="let user of users" [routerLink]="['/user', user.id]">
+    <mat-card-content>
+      <svg class="pic" width="50" height="50" [data-jdenticon-value]="user.name"></svg>
+      <div>@{{user.name}}</div>
+    </mat-card-content>
+  </mat-card>
+</div>
