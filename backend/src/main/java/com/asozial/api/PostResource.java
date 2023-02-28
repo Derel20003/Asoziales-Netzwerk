@@ -4,7 +4,7 @@ import com.asozial.model.Interaction;
 import com.asozial.model.Post;
 import com.asozial.model.dto.InteractionDTO;
 import com.asozial.model.dto.PostDTO;
-import com.asozial.repository.PostRepository;
+import com.asozial.service.PostService;
 import org.bson.types.ObjectId;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
@@ -24,32 +24,32 @@ import java.util.List;
 public class PostResource {
 
     @Inject
-    PostRepository postRepository;
+    PostService postService;
     @Inject
     JsonWebToken jwt;
 
     @GET
     @Path("{id}")
     public Post get(@PathParam("id") String id) {
-        return postRepository.findById(new ObjectId(id));
+        return postService.findById(id);
     }
 
     @GET
     @Path("/all")
     public Response getAll() {
-        return Response.ok(this.postRepository.getLatestPosts(0)).build();
+        return Response.ok(this.postService.getLatestPosts(0)).build();
     }
 
     @GET
     @Path("/user/{id}")
     public Response getPostsForUser(@PathParam("id") String id) {
-        return Response.ok(this.postRepository.getPostsByUser(new ObjectId(id))).build();
+        return Response.ok(this.postService.getPostsByUser(id)).build();
     }
 
     @GET
     @Path("/find")
     public List<Post> find(@QueryParam("content") String content) {
-        return postRepository.list("content", content);
+        return postService.search(content);
     }
 
     @POST
@@ -60,31 +60,31 @@ public class PostResource {
         post.userId = new ObjectId(jwt.getName());
         if (p.commentOn != null)
             post.commentOn = new ObjectId(p.commentOn);
-        postRepository.persist(post);
+        postService.persist(post);
         return Response.created(URI.create(post.id.toString())).build();
     }
 
     @POST
     @Path("/interact")
     public Response interact(InteractionDTO i) {
-        postRepository.findByIdOptional(new ObjectId(i.postId)).ifPresent(p -> {
+        postService.findByIdOptional(i.postId).ifPresent(p -> {
             Interaction interaction = new Interaction();
             interaction.interactorId = new ObjectId(jwt.getName());
             interaction.type = i.type;
             interaction.timestamp = LocalDateTime.now();
             p.interactions.add(interaction);
-            postRepository.update(p);
+            postService.update(p);
         });
         return Response.status(201).build();
     }
 
     @PUT
     public void update(Post post) {
-        postRepository.findByIdOptional(post.id).ifPresent(p -> {
+        postService.findByIdOptional(post.id.toHexString()).ifPresent(p -> {
             ObjectId id = new ObjectId(jwt.getName());
             if (p.userId.equals(id)) {
                 post.userId = id;
-                postRepository.update(post);
+                postService.update(post);
             }
         });
     }
@@ -92,10 +92,10 @@ public class PostResource {
     @DELETE
     @Path("{id}")
     public void delete(@PathParam("id") String id) {
-        postRepository.findByIdOptional(new ObjectId(id))
+        postService.findByIdOptional(id)
                 .ifPresent(post -> {
                     if (post.userId.equals(new ObjectId(jwt.getName()))) {
-                        postRepository.delete(post);
+                        postService.delete(post);
                     }
                 });
     }
