@@ -2,6 +2,7 @@ package com.asozial;
 
 import com.asozial.model.FavoriteCat;
 import com.asozial.model.Post;
+import com.asozial.model.Subscription;
 import com.asozial.model.User;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -39,7 +40,14 @@ public class Main {
             getDatabase().getCollection("post").drop();
 
             // ADD DATA TO COLLECTIONS
-            getDatabase().getCollection("user", User.class).insertMany(createUsers());
+            List<User> users = createUsers();
+            getDatabase().getCollection("user", User.class).insertOne(users.get(1));
+            users.remove(1);
+            Subscription subscription = new Subscription();
+            subscription.subscribedToId = Objects.requireNonNull(getDatabase().getCollection("user", User.class).find().first()).id;
+            subscription.timestamp = LocalDateTime.now();
+            users.get(0).subscriptions.add(subscription);
+            getDatabase().getCollection("user", User.class).insertMany(users);
             getDatabase().getCollection("post", Post.class).insertMany(createPosts(getDatabase().getCollection("user", User.class).find()));
 
             Quarkus.waitForExit();

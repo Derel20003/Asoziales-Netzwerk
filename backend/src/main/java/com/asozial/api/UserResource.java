@@ -2,6 +2,7 @@ package com.asozial.api;
 
 import com.asozial.model.User;
 import com.asozial.service.UserService;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
@@ -28,6 +29,13 @@ public class UserResource {
     public User get(@PathParam("id") String id) {
         return userService.findById(id);
     }
+
+    @GET
+    @Path("/profile/{id}")
+    public Document getProfile(@PathParam("id") String id) {
+        return userService.getUserProfile(id);
+    }
+
 
     @GET
     @Path("/all")

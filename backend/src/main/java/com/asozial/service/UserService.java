@@ -2,6 +2,7 @@ package com.asozial.service;
 
 import com.asozial.model.User;
 import com.asozial.repository.UserRepository;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -47,5 +48,12 @@ public class UserService {
 
     public void delete(User user) {
         userRepository.delete(user);
+    }
+
+    public Document getUserProfile(String id) {
+        ObjectId oid = new ObjectId(id);
+        Document profile = userRepository.getUserProfile(oid);
+        profile.append("subscribers", userRepository.getSubscriberCount(oid));
+        return profile;
     }
 }
