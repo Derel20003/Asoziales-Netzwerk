@@ -7,6 +7,7 @@ import {MatDialogRef} from "@angular/material/dialog";
   styleUrls: ['./post-dialog.component.css']
 })
 export class PostDialogComponent implements OnInit {
+  postContent: String = '';
 
   constructor(public dialogRef: MatDialogRef<PostDialogComponent>) { }
 

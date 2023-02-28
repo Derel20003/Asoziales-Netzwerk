@@ -2,4 +2,5 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-button { background: #00B2FFFF !important; }
+.blue-button-flat:enabled { background: #00B2FFFF !important; }
+.blue-button-stroked:enabled { color: #00B2FFFF !important; }
