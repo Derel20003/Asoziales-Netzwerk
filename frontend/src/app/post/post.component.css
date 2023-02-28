@@ -1,9 +1,13 @@
 mat-card-header {
   font-size: 1.2rem;
+  margin-top: .5rem !important;
 }
 
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
+}
 .interactions {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
 }
@@ -13,7 +17,7 @@ mat-card-header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 1vw;
+  margin-right: 1vw;
 }
 
 .interactions mat-icon {
