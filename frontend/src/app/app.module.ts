@@ -16,6 +16,9 @@ import { CatsComponent } from './cats/cats.component';
 import { UsersComponent } from './users/users.component';
 import { SearchComponent } from './search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -38,7 +41,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatListModule,
     NgbModule
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'de-AT'},
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,
+      multi: true
+    },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
