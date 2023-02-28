@@ -6,7 +6,9 @@
 
 mat-card {
   flex: fit-content 0 0;
-  margin: 1rem;
+  margin: 1rem 0 0 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
 }
 
 mat-card > * {
@@ -22,4 +24,5 @@ mat-card-header {
 img {
   max-width: 20vw;
   max-height: 30vh;
+  border-radius: 10px;
 }

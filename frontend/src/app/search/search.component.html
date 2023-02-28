@@ -1,6 +1,6 @@
 <mat-card class="mat-elevation-z0">
   <mat-card-header>
-    <mat-form-field class="search-field">
+    <mat-form-field class="search-field" color="accent" appearance="outline">
       <mat-label>Search</mat-label>
       <input matInput [ngModel]="query | async" (ngModelChange)="query.next($event)">
       <mat-icon matSuffix>search</mat-icon>

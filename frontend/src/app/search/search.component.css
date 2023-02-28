@@ -1,0 +1,15 @@
+:host ::ng-deep .mat-form-field-outline-start  {
+  border-color: #00B2FFFF !important;
+}
+
+:host ::ng-deep .mat-form-field-outline-end {
+  border-color: #00B2FFFF !important;
+}
+
+:host ::ng-deep .mat-form-field-outline-gap {
+  border-color: #00B2FFFF !important;
+}
+
+:host ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-outline-gap {
+  border-top-color: transparent !important;
+}

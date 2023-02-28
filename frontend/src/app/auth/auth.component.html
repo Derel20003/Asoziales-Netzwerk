@@ -1,10 +1,10 @@
-<mat-card>
+<mat-card class="mat-elevation-z0">
   <form [formGroup]="loginForm" (submit)="login()">
     <mat-card-content>
       <h2>Login</h2>
       <div class="row">
         <div class="col">
-          <mat-form-field>
+          <mat-form-field color="accent">
             <input matInput type="email" placeholder="E-Mail" formControlName="email">
             <mat-error>
               Bitte gültige E-Mail angeben!
@@ -14,8 +14,8 @@
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field>
-            <input matInput type="password" placeholder="password" formControlName="password">
+          <mat-form-field color="accent">
+            <input matInput type="password" placeholder="Password" formControlName="password">
             <mat-error>
               Bitte gültiges Passwort angeben!
             </mat-error>
@@ -24,7 +24,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <button mat-flat-button class="blue-button-flat" color="primary">Anmelden</button>
+          <button mat-flat-button class="blue-button-flat mt-3" color="primary">Anmelden</button>
         </div>
       </div>
     </mat-card-content>

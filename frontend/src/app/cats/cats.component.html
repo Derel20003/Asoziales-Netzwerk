@@ -1,5 +1,5 @@
 <div class="cats">
-  <mat-card *ngFor="let cat of cats">
+  <mat-card *ngFor="let cat of cats" class="mat-elevation-z0">
     <mat-card-header>
       <mat-checkbox [checked]="includes(cat)" (change)="toggle(cat)">{{cat.name}}</mat-checkbox>
     </mat-card-header>
