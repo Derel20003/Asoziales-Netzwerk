@@ -28,4 +28,8 @@ export class HttpService {
   interact(id: string, interaction: string): Observable<any> {
     return this.http.post(this.BASE_URL + 'post/interact', {postId: id, type: interaction});
   }
+
+  searchPosts(query: string): Observable<Post[]>  {
+    return this.http.get<Post[]>(this.BASE_URL + 'post/find?content=' + query);
+  }
 }

@@ -22,7 +22,7 @@ import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import { AuthComponent } from './auth/auth.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import { PostComponent } from './post/post.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
@@ -60,7 +60,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     HttpClientModule,
     MatInputModule,
     NgxJdenticonModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'de-AT'},
     {
