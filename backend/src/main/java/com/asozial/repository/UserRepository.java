@@ -13,8 +13,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
 
-import static com.mongodb.client.model.Sorts.descending;
-
 @ApplicationScoped
 public class UserRepository implements PanacheMongoRepository<User> {
 
